@@ -27,9 +27,8 @@ public class EnemyController : MonoBehaviour
         float orbitSpeed = baseOrbitSpeed + distanceToPlayer * orbitSpeedMultiplier;
         orbitAngle += orbitSpeed * Time.deltaTime;
 
-        float x = player.transform.position.x + Mathf.Cos(orbitAngle) * distanceToPlayer;
-        float z = player.transform.position.z + Mathf.Sin(orbitAngle) * distanceToPlayer;
-        transform.position = new Vector3(x, transform.position.y, z);
+        Vector3 orbitOffset = new Vector3(Mathf.Cos(orbitAngle), 0f, Mathf.Sin(orbitAngle)) * distanceToPlayer;
+        transform.position = player.transform.position + orbitOffset;
 
         float targetAngle = Mathf.Atan2(directionToPlayer.x, directionToPlayer.z) * Mathf.Rad2Deg;
         Vector3 currentRotation = transform.eulerAngles;
